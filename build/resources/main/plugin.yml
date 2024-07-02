@@ -1,0 +1,4 @@
+name: TrickyTPA
+version: '0.1'
+main: net.trickycreations.trickytpa.TrickyTPA
+api-version: '1.21'

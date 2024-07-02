@@ -1,0 +1,59 @@
+settings:
+  tpa_countdown: 0
+  expired_time: 60 # seconds
+  format:
+    tpa: "tpa"
+    tpa_here: "tpahere"
+
+messages:
+  player_not_found: "&cPlayer not found!"
+  enter_player: "&cEnter the player name."
+
+  usage_tpahere: "&cUse: /tpahere <player> to send a tpahere request."
+  usage_tpa: "&cUse: /tpa <player> to send a tpa request."
+
+  cant_tpa_yourself: "&cYou can't sent a request to yourself."
+
+  no_requests: "&cYou have not received any requests from this player."
+
+  request_sent: "&aYou sent the {type} request for {receiver}!"
+  request_received: "&eYou received a {type} request from {sender}!"
+
+  receiver_accept: "&aYou accepted {type}'s request!"
+  sender_notify_accept: "&aThe {type}'s request was accepted."
+
+  receiver_refuse: "&cYou refused {type}'s request!"
+  sender_notify_refuse: "&cThe {type}'s request was refused."
+
+
+guis:
+  sent_confirm:
+    title: "Confirm Request"
+    rows: 3
+
+    info:
+      slot: 13
+      type: BEACON
+      display_name: "&e{receiver}"
+      lore:
+        - ""
+        - "&fThe player to which you will have to send the tpa"
+      glow: false
+
+    accept:
+      slot: 16
+      type: LIME_STAINED_GLASS_PANE
+      display_name: "&cConfirm"
+      lore:
+        - ""
+        - "&fLeft click to confirm the request"
+      glow: false
+
+    refuse:
+      slot: 10
+      type: RED_STAINED_GLASS_PANE
+      display_name: "&cCancel"
+      lore:
+        - ""
+        - "&fLeft click to cancel the request"
+      glow: false
