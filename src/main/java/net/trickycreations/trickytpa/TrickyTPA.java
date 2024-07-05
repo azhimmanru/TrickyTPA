@@ -37,10 +37,10 @@ public final class TrickyTPA extends JavaPlugin {
         PaperCommandManager commandManager = new PaperCommandManager(this);
 
         List.of(
-                new TpaCommand(this),
+                new TpaCommand(),
                 new TpAcceptCommand(this),
                 new TpaDenyCommand(this),
-                new TpaHereCommand(this)
+                new TpaHereCommand()
         ).forEach(commandManager::registerCommand);
     }
 }

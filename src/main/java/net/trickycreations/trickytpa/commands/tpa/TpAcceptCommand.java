@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.Default;
 import lombok.RequiredArgsConstructor;
 import net.trickycreations.trickytpa.TrickyTPA;
 import net.trickycreations.trickytpa.enums.Messages;
-import net.trickycreations.trickytpa.utilities.strings.CC;
+import net.trickycreations.trickytpa.gui.AcceptGui;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -18,7 +18,7 @@ public class TpAcceptCommand extends BaseCommand {
     private final TrickyTPA instance;
 
     @Default
-    public void onCommand(Player player, String[] args) {
+    public void command(Player player, String[] args) {
         if (args.length == 0) {
             Messages.ENTER_PLAYER.send(player);
             return;
@@ -28,6 +28,7 @@ public class TpAcceptCommand extends BaseCommand {
             Messages.PLAYER_NOT_FOUND.send(player);
             return;
         }
-        instance.getTpaManager().acceptRequest(player, player1);
+
+        new AcceptGui(player, player1).open(player);
     }
 }

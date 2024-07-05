@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.trickycreations.trickytpa.TrickyTPA;
 import net.trickycreations.trickytpa.enums.Messages;
-import net.trickycreations.trickytpa.thread.TpaRequestRunnable;
+import net.trickycreations.trickytpa.enums.Settings;
+import net.trickycreations.trickytpa.tasks.TpaRequestRunnable;
 import net.trickycreations.trickytpa.tpa.model.TpaRequest;
 import net.trickycreations.trickytpa.tpa.model.TpaType;
 import org.bukkit.entity.Player;
@@ -32,7 +33,7 @@ public class TpaManager {
     private void startTask(TpaRequest request) {
         if (request == null)
             return;
-        new TpaRequestRunnable(this, request).runTaskTimerAsynchronously(instance, 0L, 20L);
+        new TpaRequestRunnable(this, request).runTaskLaterAsynchronously(instance, Settings.EXPIRED_TIME.get(Integer.class) * 20L);
     }
 
     public void acceptRequest(Player receiver, Player sender) {
@@ -42,9 +43,12 @@ public class TpaManager {
                 Messages.NO_REQUESTS.send(receiver);
                 return;
             }
+
             Messages.RECEIVER_ACCEPT.send(receiver, "{type}", getType(request.getType()));
             Messages.SENDER_NOTIFY_ACCEPT.send(sender, "{type}", getType(request.getType()));
             request.startTeleport();
+
+            requests.remove(sender.getUniqueId());
             return;
         }
         Messages.NO_REQUESTS.send(receiver);

@@ -1,6 +1,6 @@
 settings:
   tpa_countdown: 0
-  expired_time: 60 # seconds
+  expired_time: 15 # seconds
   format:
     tpa: "tpa"
     tpa_here: "tpahere"
@@ -33,17 +33,16 @@ guis:
 
     info:
       slot: 13
-      type: BEACON
       display_name: "&e{receiver}"
       lore:
         - ""
-        - "&fThe player to which you will have to send the tpa"
+        - "&fPlayer to whom the teleportation request should be sent."
       glow: false
 
     accept:
       slot: 16
       type: LIME_STAINED_GLASS_PANE
-      display_name: "&cConfirm"
+      display_name: "&aConfirm"
       lore:
         - ""
         - "&fLeft click to confirm the request"
@@ -56,4 +55,34 @@ guis:
       lore:
         - ""
         - "&fLeft click to cancel the request"
+      glow: false
+
+  accept_request:
+    title: "Response Request"
+    rows: 3
+
+    info:
+      slot: 13
+      display_name: "&e{receiver}"
+      lore:
+        - ""
+        - "&fWill you accept teleportation from this player?"
+      glow: false
+
+    accept:
+      slot: 16
+      type: LIME_STAINED_GLASS_PANE
+      display_name: "&aConfirm"
+      lore:
+        - ""
+        - "&fLeft click to accept the teleport"
+      glow: false
+
+    refuse:
+      slot: 10
+      type: RED_STAINED_GLASS_PANE
+      display_name: "&cCancel"
+      lore:
+        - ""
+        - "&fLeft click to cancel the teleport"
       glow: false
