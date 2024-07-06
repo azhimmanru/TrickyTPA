@@ -9,6 +9,9 @@ import net.trickycreations.trickytpa.TrickyTPA;
 public enum Settings {
     EXPIRED_TIME("settings.expired_time"),
     TPA_COUNTDOWN("settings.tpa_countdown"),
+
+    TELEPORT_TITLE("settings.teleport.title"),
+    TELEPORT_ACTION_BAR("settings.teleport.action_bar"),
     ;
 
     private final String path;

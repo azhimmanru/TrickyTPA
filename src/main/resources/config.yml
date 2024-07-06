@@ -1,9 +1,9 @@
 settings:
   tpa_countdown: 0
   expired_time: 15 # seconds
-  format:
-    tpa: "tpa"
-    tpa_here: "tpahere"
+  teleport:
+    action_bar: true
+    title: true
 
 messages:
   player_not_found: "&cPlayer not found!"
@@ -25,6 +25,22 @@ messages:
   receiver_refuse: "&cYou refused {type}'s request!"
   sender_notify_refuse: "&cThe {type}'s request was refused."
 
+  teleport:
+    messages:
+      cancelled: "&cTeleportation cancelled."
+      success: "&aTeleportation completed."
+      progress: "&eYou will be teleported in {time} seconds!"
+    action_bar:
+      progress: "&b{time} seconds"
+      cancel: "&cTeleportation cancelled"
+      success: "&aTeleportation completed"
+    title:
+      progress_title: "&3Teleportation in progress..."
+      progress_sub_title: "&f{time}"
+      cancelled_title: "&cTeleportation cancelled"
+      cancelled_sub_title: "&fYou moved!"
+      success_title: "&aTeleported successfully!"
+      success_sub_title: "&fYou have been teleported!"
 
 guis:
   sent_confirm:

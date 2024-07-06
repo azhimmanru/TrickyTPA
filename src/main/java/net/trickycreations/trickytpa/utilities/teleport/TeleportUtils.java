@@ -3,6 +3,7 @@ package net.trickycreations.trickytpa.utilities.teleport;
 import com.google.common.collect.Maps;
 import lombok.experimental.UtilityClass;
 import net.trickycreations.trickytpa.TrickyTPA;
+import net.trickycreations.trickytpa.enums.Messages;
 import net.trickycreations.trickytpa.enums.Settings;
 import net.trickycreations.trickytpa.utilities.strings.CC;
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -21,7 +22,7 @@ public final class TeleportUtils {
     public void startCountdownTeleport(Player player, Location destination) {
         int seconds = Settings.TPA_COUNTDOWN.get(Integer.class);
         cancelExistingTeleport(player);
-        if(seconds <= 0) {
+        if (seconds <= 0) {
             handleTeleportSuccess(player, destination);
             return;
         }
@@ -63,23 +64,33 @@ public final class TeleportUtils {
     }
 
     private void handleTeleportFailure(Player player) {
-        CC.sendTitle(player, "&cTeletrasporto fallito", "&fHai mosso, il teletrasporto è stato annullato", 2);
-        CC.send(player, "&cTeletrasporto fallito, hai mosso!");
-        CC.sendActionBar(player, "&cTeletrasporto annullato");
+        Messages.TELEPORT_CANCELLED.send(player);
+        if(Settings.TELEPORT_ACTION_BAR.get(Boolean.class))
+            Messages.TELEPORT_ACTION_BAR_CANCEL.sendActionBar(player);
+        if(Settings.TELEPORT_TITLE.get(Boolean.class))
+            CC.sendTitle(player, Messages.TELEPORT_TITLE_CANCELLED_TITLE.get(), Messages.TELEPORT_TITLE_CANCELLED_SUB_TITLE.get(), 2);
     }
 
     private void handleTeleportSuccess(Player player, Location toLocation) {
         player.teleportAsync(toLocation);
-        CC.sendActionBar(player, "&aTeletrasportato!");
-        CC.sendTitle(player, "&aTeletrasporto completato", "", 2);
+        Messages.TELEPORT_SUCCESS.send(player);
+        if(Settings.TELEPORT_ACTION_BAR.get(Boolean.class))
+            Messages.TELEPORT_ACTION_BAR_SUCCESS.sendActionBar(player);
+        if(Settings.TELEPORT_TITLE.get(Boolean.class))
+            CC.sendTitle(player, Messages.TELEPORT_TITLE_SUCCESS_TITLE.get(), Messages.TELEPORT_TITLE_SUCCESS_SUB_TITLE.get(), 2);
     }
 
     private void handleTeleportProgress(Player player, int cooldown) {
-        CC.sendTitle(player, "&aTeleport in corso", "&7Tempo rimanente: " + cooldown + " secondi", 2);
-        CC.sendActionBar(player, "&e" + cooldown + " secondi");
+        Messages.TELEPORT_PROGRESS.send(player, "{time}", String.valueOf(cooldown));
+        if(Settings.TELEPORT_ACTION_BAR.get(Boolean.class))
+            Messages.TELEPORT_ACTION_BAR_PROGRESS.sendActionBar(player, "{time}", String.valueOf(cooldown));
+        if(Settings.TELEPORT_TITLE.get(Boolean.class))
+            CC.sendTitle(player, Messages.TELEPORT_TITLE_PROGRESS_TITLE.get().replace("{time}", String.valueOf(cooldown)), Messages.TELEPORT_TITLE_PROGRESS_SUB_TITLE.get().replace("{time}", String.valueOf(cooldown)), 2);
     }
 
     private void cancelTeleport(Player player) {
-        teleports.remove(player.getUniqueId()).cancel();
+        BukkitTask existingTask = teleports.remove(player.getUniqueId());
+        if (existingTask != null)
+            existingTask.cancel();
     }
 }
